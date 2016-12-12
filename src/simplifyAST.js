@@ -31,6 +31,7 @@ function simplifyObjectValue(objectValue) {
     memo[field.name.value] =
       field.value.kind === 'IntValue' ? parseInt( field.value.value, 10 ) :
       field.value.kind === 'FloatValue' ? parseFloat( field.value.value ) :
+      field.value.kind === 'BooleanValue' ? JSON.parse( field.value.value ) :
       field.value.kind === 'ObjectValue' ? simplifyObjectValue( field.value ) :
         field.value.value;
 
