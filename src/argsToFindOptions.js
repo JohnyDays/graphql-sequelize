@@ -13,23 +13,19 @@ export default function argsToFindOptions(args, target) {
 
       if (key === 'limit' && args[key]) {
         result.limit = parseInt(args[key], 10);
-      }
-
-      if (key === 'offset' && args[key]) {
+      } else if (key === 'offset' && args[key]) {
         result.offset = parseInt(args[key], 10);
-      }
-
-      if (key === 'order' && args[key]) {
+      } else if (key === 'order' && args[key]) {
         if (args[key].indexOf('reverse:') === 0) {
           result.order = [[args[key].substring(8), 'DESC']];
         } else {
           result.order = [[args[key], 'ASC']];
         }
-      }
-
-      if (key === 'where' && args[key]) {
+      } else if (key === 'where' && args[key]) {
         // setup where
         result.where = replaceWhereOperators(args.where);
+      } else {
+        result[key] = args[key];
       }
 
     });
